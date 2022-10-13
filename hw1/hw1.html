@@ -60,7 +60,7 @@ class Lamp {
   }
   toggle() {
 	if(powerState && mode === 0){
-		let time = Math.random() * 300 + 100;
+		let time = Math.random() * 1000 + 1000;
 		this.myStatus = ! this.myStatus;
 		if (this.myStatus === true) {
 		  this.lightOn()
@@ -73,7 +73,7 @@ class Lamp {
 	}
 	else {
 		var that = this;
-		setTimeout(function() {that.lightOff();}, 401)
+		setTimeout(function() {that.lightOff();}, 100)
 	}
   }
   lightOff(){
@@ -98,7 +98,7 @@ $('#toggleLight').click (function() {
    if (powerState === true) {
 	  if(mode === 0){
 		Lamps.forEach(function (b){
-			let time = Math.floor(Math.random() * 300 + 100);
+			let time = Math.floor(Math.random() * 1000 + 1000);
 			var that = b;
 			setTimeout(function() {
 				that.toggle();
@@ -122,33 +122,21 @@ $('#toggleMode').click (function() {
 	  if(mode === 0){
 		setTimeout(function(){
 		Lamps.forEach(function (b){
-			let time = Math.floor(Math.random() * 300 + 100);
+			let time = Math.floor(Math.random() * 1000 + 1000);
 			var that = b;
 			setTimeout(function() {
 				that.toggle();
 			}, time);
-		})},1000)
+		})},500)
 	  }
 	  else if (mode === 1){
-		setTimeout(toggle1,1000);
+		setTimeout(toggle1,2000);
 	  }
 	  else if (mode === 2){
-		setTimeout(toggle2,1000);
+		setTimeout(toggle2,500);
 	  }
 	}
 });
-
-function toggle () {
-   blinkState = ! blinkState;
-    if(blinkState){
-		$('#'+Lamps[index].name).css('backgroundColor', `hsl(${Lamps[index].hue},90%,80%)`);
-	}
-	else{
-		$('#'+Lamps[index].name).css('backgroundColor', `hsl(${Lamps[index].hue},90%,24%)`);
-	}
-   if (powerState === true)
-      setTimeout (toggle, 500);
-}
 function addLamp(){
 	///row1
 	let l1 = new Lamp ([0.58,0.345],Math.random() * 360);
@@ -206,7 +194,7 @@ function toggle1(){
 		setTimeout(toggle1,100)
 	}
 	else {
-		setTimeout (function(){Lamps.forEach(function (b){b.lightOff()})}, 150);
+		setTimeout (function(){Lamps.forEach(function (b){b.lightOff()})}, 100);
 		index = 0;
 	}
 }
@@ -222,10 +210,10 @@ function toggle2(){
 			sign = 1;
 			Lamps.forEach(function (b){if(b.name % 2 === 1) b.lightOff()})
 		}
-			setTimeout (toggle2, 500);
+			setTimeout (toggle2, 1000);
 	}
 	else {
-		setTimeout (function(){Lamps.forEach(function (b){b.lightOff()})}, 150);
+		setTimeout (function(){Lamps.forEach(function (b){b.lightOff()})}, 100);
 		sign = 1;
 	}
 }
