@@ -41,28 +41,38 @@ var firstClick = true;
 var lightSign = true;
 var lights = [];
 var anotherLights = [];
+
 $("#toggle1").click(function(){
+
 	if(index < 6)
 		index++;
 	else
 		index = 0;
-	firstClick = true;
-	if(firstClick){
-		camera.position.copy(cameraPos[index]);
-		let temp = cameraPos[index].clone();
-		if(index != 6)
-			temp.z += 20;
-		else
-			temp.y -= 20;
-		controls.target.copy(temp)
-		controls.update();
-		firstClick = false;
-	}
+		
+	camera.position.copy(cameraPos[index]);
+	
+	let temp = cameraPos[index].clone();
+	
+	if(index != 6)
+		temp.z += 20;
+	else
+		temp.y -= 20;
+		
+	controls.target.copy(temp)
+	controls.update();
 	
 })
+
 $("#toggle2").click(function(){
 	lightSign = !lightSign;
+	
 	lights.forEach(function (b){b.switchLight(lightSign)});
+	
+	for(let k = 0; k < lights.length; k++){
+		let b = lights[k]
+		b.switchLight(lightSign);
+	}
+	
 	if(lightSign){
 		$("#toggle2").text("Turn Off");
 		anotherLights.forEach(function(b){b.power = 10})
@@ -905,7 +915,6 @@ function setCameraPos(){
 	cameraPos.push(new THREE.Vector3(0,2000,0))
 }
 function animate() {
-	//console.log(camera.position.x,camera.position.y,camera.position.z)
   requestAnimationFrame(animate);
   renderer.render(scene, camera);
 }
