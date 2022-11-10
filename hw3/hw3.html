@@ -56,13 +56,12 @@ $("#toggle1").click(function(){
 	if(index != 6)
 		temp.z += 20;
 	else
-		temp.y -= 20;
+		temp.y -= 2000;
 		
 	controls.target.copy(temp)
 	controls.update();
 	
 })
-
 $("#toggle2").click(function(){
 	lightSign = !lightSign;
 	
@@ -178,6 +177,7 @@ function buildChair() {
   boxTop.position.set(0,scale * 0.375, 0);
   boxLeg1.position.set(-scale + scale * 0.0625, scale * 0.125, 0);
   boxLeg2.position.set(scale - scale * 0.0625, scale * 0.125, 0);
+  
   group.add(boxTop, boxLeg1, boxLeg2);
   return group;
 }
