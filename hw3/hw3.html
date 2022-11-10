@@ -47,6 +47,18 @@ $("#toggle1").click(function(){
 	else
 		index = 0;
 	firstClick = true;
+	if(firstClick){
+		camera.position.copy(cameraPos[index]);
+		let temp = cameraPos[index].clone();
+		if(index != 6)
+			temp.z += 20;
+		else
+			temp.y -= 20;
+		controls.target.copy(temp)
+		controls.update();
+		firstClick = false;
+	}
+	
 })
 $("#toggle2").click(function(){
 	lightSign = !lightSign;
@@ -114,9 +126,12 @@ function init() {
   document.body.appendChild(renderer.domElement);
 
   camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 10000);
-  camera.position.z = 500; // camera at (0,0,500)
+  camera.position.y = 200; // camera at (0,0,500)
   controls = new THREE.OrbitControls(camera, renderer.domElement);
-
+  
+  controls.target.copy(new THREE.Vector3(0,200,20));
+  controls.update();
+  
   ////////////////////////////////////////////////////////
   var gridXZ = new THREE.GridHelper(1400, 28, 'red', 'white');
 	gridXZ.position.y = 0.1
@@ -802,7 +817,7 @@ function buildOrbit(){
 	bar1.position.set(755,470,311.5)
 	bar2.position.set(685,470,623)
 	bar3.position.set(680,470,413)
-	bar4.position.set(625,470,235)
+	bar4.position.set(625,470,232.75)
 	Orbit1.add(bar1,bar2,bar3,bar4)
 	let cylinder1 = new THREE.Mesh(new THREE.CylinderGeometry(2,2,15),material)
 	cylinder1.position.set(620,462.5,623)
@@ -813,7 +828,8 @@ function buildOrbit(){
 	let cylinder4 = new THREE.Mesh(new THREE.CylinderGeometry(2,2,15),material)
 	cylinder4.position.set(617.5,462.5,413)
 	let cylinder5 = new THREE.Mesh(new THREE.CylinderGeometry(2,2,15),material)
-	cylinder5.position.set(505,462.5,235)
+	cylinder5.position.set(515,462.5,232.75)
+	
 	Orbit1.add(cylinder1,cylinder2,cylinder3,cylinder4,cylinder5)
 	let temp1 = Orbit1.clone();
 	temp1.rotation.y = Math.PI
@@ -827,7 +843,7 @@ function buildOrbit(){
 	bar5.position.set(755,470,-311.5)
 	bar6.position.set(685,470,-623)
 	bar7.position.set(680,470,-413)
-	bar8.position.set(625,470,-235)
+	bar8.position.set(625,470,-232.75)
 	Orbit2.add(bar5,bar6,bar7,bar8)
 	let cylinder6 = new THREE.Mesh(new THREE.CylinderGeometry(2,2,15),material)
 	cylinder6.position.set(620,462.5,-623)
@@ -838,7 +854,8 @@ function buildOrbit(){
 	let cylinder9 = new THREE.Mesh(new THREE.CylinderGeometry(2,2,15),material)
 	cylinder9.position.set(617.5,462.5,-413)
 	let cylinder10 = new THREE.Mesh(new THREE.CylinderGeometry(2,2,15),material)
-	cylinder10.position.set(505,462.5,-235)
+	cylinder10.position.set(515,462.5,-232.75)
+	
 	Orbit2.add(cylinder6,cylinder7,cylinder8,cylinder9,cylinder10)	
 	let temp2 = Orbit2.clone();
 	temp2.rotation.y = Math.PI
@@ -889,17 +906,6 @@ function setCameraPos(){
 }
 function animate() {
 	//console.log(camera.position.x,camera.position.y,camera.position.z)
-	if(firstClick){
-		camera.position.copy(cameraPos[index]);
-		let temp = cameraPos[index].clone();
-		if(index != 6)
-			temp.z += 20;
-		else
-			temp.y -= 20;
-		controls.target.copy(temp)
-		controls.update();
-		firstClick = false;
-	}
   requestAnimationFrame(animate);
   renderer.render(scene, camera);
 }
