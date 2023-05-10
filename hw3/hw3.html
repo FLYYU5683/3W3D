@@ -18,7 +18,6 @@ body {
 </style>
 <body>
 <script src="https://threejs.org/build/three.min.js"></script>
-<script src="https://threejs.org/examples/js/controls/OrbitControls.js"></script>
 <script
   src="https://code.jquery.com/jquery-3.6.0.min.js"
   integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
@@ -28,7 +27,8 @@ body {
 <button id = 'toggle2' style = "width: 15%;margin-right:25px;background-color:pink;">Turn Off</button>
 </div>
 
-<script>
+<script type="module">
+import {OrbitControls} from 'https://cdn.skypack.dev/three@0.136/examples/jsm/controls/OrbitControls.js';
 var camera, scene, renderer;
 var scale = 100;
 var wallMaterial = new THREE.MeshPhongMaterial({ color:0xfffdeb })
@@ -136,7 +136,7 @@ function init() {
 
   camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 10000);
   camera.position.y = 200; // camera at (0,0,500)
-  controls = new THREE.OrbitControls(camera, renderer.domElement);
+  controls = new OrbitControls(camera, renderer.domElement);
   
   controls.target.copy(new THREE.Vector3(0,200,20));
   controls.update();
