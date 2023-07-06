@@ -44,10 +44,12 @@ var anotherLights = [];
 
 $("#toggle1").click(function(){
 
-	if(index < 6)
+	if(index < 6){
 		index++;
-	else
+	}
+	else if (index >= 6){
 		index = 0;
+	}
 		
 	camera.position.copy(cameraPos[index]);
 	
@@ -55,7 +57,7 @@ $("#toggle1").click(function(){
 	
 	if(index != 6)
 		temp.z += 20;
-	else
+	else if (index == 6)
 		temp.y -= 2000;
 		
 	controls.target.copy(temp)
