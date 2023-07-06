@@ -44,11 +44,12 @@ var anotherLights = [];
 
 $("#toggle1").click(function(){
 
-	if(index < 6)
+	if(index < 6){
 		index++;
-	else
+	}
+	else{
 		index = 0;
-		
+	}	
 	camera.position.copy(cameraPos[index]);
 	
 	let temp = cameraPos[index].clone();
@@ -126,7 +127,7 @@ init();
 animate();
 
 function init() {
-  var a;
+
   scene = new THREE.Scene();
 
   renderer = new THREE.WebGLRenderer();
