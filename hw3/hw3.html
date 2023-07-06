@@ -126,7 +126,7 @@ init();
 animate();
 
 function init() {
-
+  var a;
   scene = new THREE.Scene();
 
   renderer = new THREE.WebGLRenderer();
@@ -136,6 +136,7 @@ function init() {
 
   camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 10000);
   camera.position.y = 200; // camera at (0,0,500)
+  
   controls = new OrbitControls(camera, renderer.domElement);
   
   controls.target.copy(new THREE.Vector3(0,200,20));
